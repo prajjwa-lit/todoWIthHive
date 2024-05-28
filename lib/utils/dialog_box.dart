@@ -20,6 +20,7 @@ class DialogBox extends StatelessWidget {
       content: Container(
         height: 120,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             //Input user tasks
             TextField(

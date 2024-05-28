@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState(); // Move super.initState() here
+    super.initState();
     _initHiveAndLoadData();
   }
 
@@ -66,10 +66,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+
+  //save new task
   void saveNewTask() {
     setState(() {
       db.todoList.add([_controller.text, false]);
+      _controller.clear();
       Navigator.of(context).pop();
+      db.updateDataBase();
     });
   }
 
@@ -94,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                 onChanged: (value) => checkBoxChanged(value, index),
                 deleteFunction: (context) => deleteTask(index),
               );
-            }));
+            })
+    );
   }
 }
