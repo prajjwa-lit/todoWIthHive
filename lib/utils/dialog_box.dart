@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:todo1/utils/my_buttons.dart';
 
 class DialogBox extends StatelessWidget {
@@ -18,7 +16,7 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.yellow,
+      backgroundColor: Colors.yellow[300],
       content: Container(
         height: 120,
         child: Column(
@@ -32,10 +30,10 @@ class DialogBox extends StatelessWidget {
             Row(
               children: [
                 //save button
-                Expanded(child: MyButton(text: 'Save', onPressed: () {})),
+                Expanded(child: MyButton(text: 'Save', onPressed:onSave)),
                 SizedBox(width: 10,),
                 //cancel button
-                Expanded(child: MyButton(text: "Cancel", onPressed: () {}))
+                Expanded(child: MyButton(text: "Cancel", onPressed: onCancel))
               ],
             )
           ],

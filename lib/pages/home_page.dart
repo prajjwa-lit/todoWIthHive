@@ -12,23 +12,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //ref to hive box
-  final _myBox = Hive.openBox('mybox');
+  late Box _myBox;
   TodoDatabase db = TodoDatabase();
 
+  @override
   void initState() {
-    // if this is the 1st time ever open in the app, then create default data
-    if (_myBox.get("TODOLIST") == null) {
-      db.createInitialData();
-    } else {
-      // there already exists data
-      db.loadData();
-    }
-
-    super.initState();
+    super.initState(); // Move super.initState() here
+    _initHiveAndLoadData();
   }
 
-
+  // Initialize Hive and load data
+  Future<void> _initHiveAndLoadData() async {
+    try {
+      _myBox = await Hive.openBox('mybox');
+      if (_myBox.get("TODOLIST") == null) {
+        db.createInitialData();
+      } else {
+        db.loadData();
+      }
+      setState(() {}); // Refresh the UI after data is loaded
+    } catch (e) {
+      print("Error opening Hive box: $e");
+    }
+  }
 
   //text controller
   final _controller = TextEditingController();
