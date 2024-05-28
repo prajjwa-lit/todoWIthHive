@@ -16,6 +16,20 @@ class _HomePageState extends State<HomePage> {
   final _myBox = Hive.openBox('mybox');
   TodoDatabase db = TodoDatabase();
 
+  void initState() {
+    // if this is the 1st time ever open in the app, then create default data
+    if (_myBox.get("TODOLIST") == null) {
+      db.createInitialData();
+    } else {
+      // there already exists data
+      db.loadData();
+    }
+
+    super.initState();
+  }
+
+
+
   //text controller
   final _controller = TextEditingController();
 
